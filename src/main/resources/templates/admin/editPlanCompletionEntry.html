@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение коэффициента выполнения плана</title>
+</head>
+<body>
+<form th:method="POST" th:object="${entry}" th:action="@{/constants/editPlanCompletionEntry}">
+    <input type="text" th:field="*{oldKey}" hidden>
+    <div>Процент выполнения плана в виде десятичной дроби, от которого начинает действовать коэффициент</div>
+    <input type="text" th:field="*{key}">
+    <div style="color: red" th:if="${#fields.hasErrors('key')}" th:errors="*{key}">Wrong key</div>
+    <br/>
+    <div>Коэффициент выполнения плана в виде десятичной дроби</div>
+    <input type="text" th:field="*{value}">
+    <div style="color: red" th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Wrong value</div>
+    <input type="submit" value="Изменить">
+</form>
+<form th:method="DELETE" th:object="${entry}" th:action="@{/constants/editPlanCompletionEntry}">
+    <input type="text" th:field="*{oldKey}" hidden>
+    <input type="submit" value="Удалить">
+</form>
+<a href="/constants">
+    <input type="button" value="Назад">
+</a>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление коэффициента премии</title>
+</head>
+<body>
+<form th:method="PUT" th:object="${entry}" th:action="@{/constants/editBonusEntry}">
+    <div>Порог чистой маржи, от которой начинает действовать коэффициент</div>
+    <input type="text" th:field="*{key}">
+    <div style="color: red" th:if="${#fields.hasErrors('key')}" th:errors="*{key}">Wrong key</div>
+    <br/>
+    <div>Коэффициент премирования в виде десятичной дроби</div>
+    <input type="text" th:field="*{value}">
+    <div style="color: red" th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Wrong value</div>
+    <input type="submit" value="Добавить">
+    <a href="/constants">
+        <input type="button" value="Назад">
+    </a>
+</form>
+
+</body>
+</html>

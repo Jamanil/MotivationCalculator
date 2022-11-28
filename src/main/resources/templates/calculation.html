@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор мотивации</title>
+</head>
+<body>
+<form th:object="${motivationCalculatorDto}" th:method="POST">
+    <table>
+        <tr>
+            <td>
+                Выручка
+            </td>
+            <td>
+                <input type="text" th:field="*{revenue}">
+                <div style="color: red" th:if="${#fields.hasErrors('revenue')}" th:errors="*{revenue}">Wrong revenue</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Рентабельность (в виде десятичной дроби)
+            </td>
+            <td>
+                <input type="text" th:field="*{profitable}">
+                <div style="color: red" th:if="${#fields.hasErrors('profitable')}" th:errors="*{profitable}">Wrong profitable</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                План по выручке
+            </td>
+            <td>
+                <input type="text" th:field="*{revenuePlan}">
+                <div style="color: red" th:if="${#fields.hasErrors('revenuePlan')}" th:errors="*{revenuePlan}">Wrong revenuePlan</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Чистая маржа + ГСМ + НДС
+            </td>
+            <td>
+                <span th:text="${#numbers.formatDecimal(motivationCalculatorDto.netMargin, 1, 2, 'POINT')}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ГСМ Сумма
+            </td>
+            <td>
+                <input type="text" th:field="*{fuel}">
+                <div style="color: red" th:if="${#fields.hasErrors('fuel')}" th:errors="*{fuel}">Wrong fuel</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Скидка на ГСМ
+            </td>
+            <td>
+                <input type="text" th:field="*{fuelDiscount}">
+                <div style="color: red" th:if="${#fields.hasErrors('fuelDiscount')}" th:errors="*{fuelDiscount}">Wrong fuelDiscount</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Дежурства
+            </td>
+            <td>
+                <input type="text" th:field="*{duty}">
+                <div style="color: red" th:if="${#fields.hasErrors('duty')}" th:errors="*{duty}">Wrong duty</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                НДС перевозчиков к возмещению
+            </td>
+            <td>
+                <input type="text" th:field="*{carrierNdsReimbursable}">
+                <div style="color: red" th:if="${#fields.hasErrors('carrierNdsReimbursable')}" th:errors="*{carrierNdsReimbursable}">Wrong carrierNdsReimbursable</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Мотивационная часть
+            </td>
+            <td>
+                <span th:text="${#numbers.formatDecimal(motivationCalculatorDto.motivation, 1, 2, 'POINT')}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ставка
+            </td>
+            <td>
+                <span th:text="${#numbers.formatDecimal(motivationCalculatorDto.paymentPerDay, 1, 2, 'POINT')}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Рабочих дней
+            </td>
+            <td>
+                <input type="text" th:field="*{workingDays}">
+                <div style="color: red" th:if="${#fields.hasErrors('workingDays')}" th:errors="*{workingDays}">Wrong workingDays</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Оклад
+            </td>
+            <td>
+                <input type="text" th:field="*{salary}">
+                <div style="color: red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}">Wrong salary</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Оклад по рабочим дням
+            </td>
+            <td>
+                <span th:text="${#numbers.formatDecimal(motivationCalculatorDto.salaryOnWorkingDays, 1, 2, 'POINT')}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                С учетом окладов
+            </td>
+            <td>
+                <strong th:text="${#numbers.formatDecimal(motivationCalculatorDto.total, 1, 2, 'POINT')}"></strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="color: red" th:if="${constantsError}" th:text="${constantsError.getMessage}">Wrong constants</div>
+                <input type="submit" value="Рассчитать">
+            </td>
+            <td>
+                <a href="/constants"><input type="button" value="Изменить константы"></a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

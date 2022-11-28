@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование коэффициентов</title>
+</head>
+<body>
+
+<form th:object="${constants}" method="POST" th:action="@{/constants/}">
+    <table>
+        <tr>
+            <td colspan="2">
+                <h4>Коэффициенты премирования</h4>
+            </td>
+        </tr>
+        <tr>
+            <th>Порог коэффициента</th>
+            <th>Значение коэффициента премирования</th>
+        </tr>
+        <tr th:each="entry : ${constants.bonusRateGrades}">
+            <td>
+                <span th:text="${entry.key}"></span>
+            </td>
+            <td>
+                <span th:text="${entry.value}"></span>
+
+            </td>
+            <td>
+                <a th:href="@{/constants/editBonusEntry/{id}(id=${entry.key})}">
+                    <input type="button" value="Редактировать">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a href="/constants/addBonusEntry">
+                    <input type="button" value="Добавить запись">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h4>Коэффициенты выполнения плана</h4>
+            </td>
+        </tr>
+        <tr>
+            <th>Порог коэффициента</th>
+            <th>Значение коэффициента плана</th>
+        </tr>
+        <tr th:each="entry : ${constants.planCompletionGrades}">
+            <td>
+                <span th:text="${entry.key}"></span>
+            </td>
+            <td>
+                <span th:text="${entry.value}"></span>
+            </td>
+            <td>
+                <a th:href="@{/constants/editPlanCompletionEntry/{id}(id=${entry.key})}">
+                    <input type="button" value="Редактировать">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a href="/constants/addPlanCompletionEntry">
+                    <input type="button" value="Добавить запись">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h4>Прочие константы</h4>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Рабочих дней в месяце
+            </td>
+            <td>
+                <input type="text" th:field="*{workingDaysInMonth}" id="workingDaysInMonth"/>
+                <div style="color: red" th:if="${#fields.hasErrors('workingDaysInMonth')}" th:errors="*{workingDaysInMonth}">Wrong workingDaysInMonth</div>
+            </td>
+            <td>
+                <input type="submit" value="Сохранить значения констант">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Процент, вычитаемый из прибыльности
+            </td>
+            <td>
+                <input type="text" th:field="*{netMarginProfitableSubtracted}" id="netMarginProfitableSubtracted"/>
+                <div style="color: red" th:if="${#fields.hasErrors('netMarginProfitableSubtracted')}" th:errors="*{netMarginProfitableSubtracted}">Wrong netMarginProfitableSubtracted</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Множитель для топлива
+            </td>
+            <td>
+                <input type="text" th:field="*{netMarginFuelCoefficient}" id="netMarginFuelCoefficient"/>
+                <div style="color: red" th:if="${#fields.hasErrors('netMarginFuelCoefficient')}" th:errors="*{netMarginFuelCoefficient}">Wrong netMarginFuelCoefficient</div>
+            </td>
+        </tr>
+    </table>
+    <a href="/"><input type="button" value="К расчету"></a>
+</form>
+</body>
+</html>
