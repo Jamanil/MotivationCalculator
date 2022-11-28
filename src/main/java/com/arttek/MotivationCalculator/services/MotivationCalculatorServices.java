@@ -92,10 +92,10 @@ public class MotivationCalculatorServices {
         float fuel = motivationCalculator.getFuel();
         float fuelDiscount = motivationCalculator.getFuelDiscount();
         float carrierNdsReimbursable = motivationCalculator.getCarrierNdsReimbursable();
-        float netMargin = revenue * (profitable - netMarginProfitableSubtracted)
+        float netMargin = revenue * (profitable / 100 - netMarginProfitableSubtracted)
                 + fuel * netMarginFuelCoefficient - fuelDiscount
                 + carrierNdsReimbursable;
-        logger.debug("Расчет чистой маржи : Выручка {} * (Рентабельность {} - Вычетаемое из рентабельности {}) + ГСМ {} * Коэффициент ГСМ {} - Скидка на ГСМ {} + НДС перевозчика к возмещению {} = {}",
+        logger.debug("Расчет чистой маржи : Выручка {} * (Рентабельность {} / 100 - Вычетаемое из рентабельности {}) + ГСМ {} * Коэффициент ГСМ {} - Скидка на ГСМ {} + НДС перевозчика к возмещению {} = {}",
                 revenue, profitable, netMarginProfitableSubtracted, fuel, netMarginFuelCoefficient, fuelDiscount, carrierNdsReimbursable, netMargin);
         return netMargin;
     }
