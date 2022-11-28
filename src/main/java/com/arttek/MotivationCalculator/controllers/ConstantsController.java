@@ -24,6 +24,7 @@ import javax.validation.Valid;
  * В "боевом" проекте я бы подключил Spring Security, доступ к "/constants" был бы только после авторизации
  * Методы класса ConstantServices были бы с аннотацией @PreAuthorize
  */
+@SuppressWarnings("SameReturnValue")
 @Controller
 @RequestMapping("/constants")
 @RequiredArgsConstructor

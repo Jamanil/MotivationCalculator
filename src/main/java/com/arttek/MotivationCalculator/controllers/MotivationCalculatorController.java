@@ -21,6 +21,7 @@ import javax.validation.Valid;
  * 23.11.2022
  * Контроллер, ответственный за ввод данных для расчета и запуск самого процесса расчета.
  */
+@SuppressWarnings("SameReturnValue")
 @Controller
 @RequiredArgsConstructor
 public class MotivationCalculatorController {
